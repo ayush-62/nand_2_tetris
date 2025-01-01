@@ -5,7 +5,9 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-std::string input_file;
-std::string output_file;
-std::string formate;
+extern std::string input_file;
+extern std::string formate;
+
+uint8_t assembler();
+
 #endif

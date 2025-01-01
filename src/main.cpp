@@ -1,10 +1,11 @@
 #include <iostream>
+#include <string>
+#include <string.h>
 #include <stdint.h>
-#include <fstream>
+#include <sys/syscall.h>
 
 #include "common.h"
 #include "compiler.h"
-#include "assembler.h"
 #include "vm_translator.h"
 
 
@@ -14,23 +15,31 @@ static const char usage[] =
                 "         --format      : format of output file\n"
                 "                         (vm, asm, bin)       \n"
                 "         --help        : list options         \n";
+
 void print_usage(){
-    std::cout<<usage<<std::endl;
+    printf("%s\n", usage);
 }
+// uint8_t check_asm(std::string input_file){
+//     strcmp(input_file+(input_file.size()-4), ".hack");
+// }
+
 uint8_t parse_arg(int argc, char* argv[]){  
     for(int i = 1; i < argc; i++){
-        if(argv[i] == "--input-file"){
-            input_file =  argv[++i];
+        if(!strcmp(argv[i], "--input-file")){
+            if(argc < 3){
+                printf("ERROR:Command line argument missing\n");
+                return FAILURE;
+            }
+            input_file = argv[++i];
         }
-        else if(argv[i] == "--format"){
+        else if(!strcmp(argv[i], "--format")){
             formate = argv[++i];
         }
-        else if(argv[i] == "--help"){
+        else if(!strcmp(argv[i], "--help")){
             print_usage();
-            
         }
         else{
-            std::cout<<"ERROR:Invalid command line option "<<argv[i]<<std::endl;
+            printf("ERROR:Invalid command line option \"%s\"\n", argv[i]);
             print_usage();
             return FAILURE;
         }
@@ -42,8 +51,9 @@ int main(int argc, char *argv[]){
     if(parse_arg(argc, argv) == FAILURE){
         return EXIT_FAILURE;
     }
+    system("mkdir -p output_files");
     // compile();
     // vm_translate();
-    // assemble();
+    assembler();
     return SUCCESS;
 }
