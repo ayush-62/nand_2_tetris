@@ -1,0 +1,90 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Memory.jack
+
+/**
+ * Memory operations library.
+ */ 
+class Memory {
+	static Array memory;
+	static Array freeList;
+    /** Initializes memory parameters. */
+    function void init() {
+		let memory = 0;
+		let freeList = 2048;
+		let freeList[0] = 16383 - 2048; // size of heap
+		let freeList[1] = null; // link to next available list
+		return;
+    }
+
+    /** Returns the value of the main memory at the given address. */
+    function int peek(int address) {
+		return memory[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+    function void poke(int address, int value) {
+		let memory[address] = value;
+		return;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+    function int alloc(int size) { // first-fit heuristics
+		var Array pointer;
+		var Array nextList;
+		var Array prevList;
+		var int listSize, next;
+		if(size < freeList[0])
+		{
+			let pointer = freeList+1;
+			let freeList = freeList + size + 1; // moving the free list to next available location
+			let freeList[0] = pointer[-1] - (size+1); // updating size
+			let pointer[-1] = size+1; // storing size of array
+			let freeList[1] = null; // next list is still null
+			return pointer;
+		}
+		else // if the size does not fit, find the next list that will fit
+		{
+			let nextList = freeList[1];
+			let prevList = freeList;
+			let listSize = nextList[0];
+			while(~(size < listSize) & ~(nextList = null))
+			{
+				let prevList = nextList;
+				let nextList = nextList[1];
+				let listSize = nextList[0];
+			}
+			if(size<listSize)
+			{
+				let pointer = nextList+1;
+				let next = nextList[1];
+				let nextList = nextList + size + 1; // moving the free list to next available location
+				let nextList[0] = pointer[-1] - (size+1); // updating size
+				let nextList[1] = next;
+				let pointer[-1] = size+1; // storing size of array
+				let prevList[1] = nextList; // have previous list now point to this updated next list
+				return pointer;
+			}
+			else
+			{
+				return 0; // should attempt defragmentation here
+			}
+		}
+    }
+
+    /** De-allocates the given object and frees its space. */
+    function void deAlloc(int object) {
+		var Array list;
+		let list = freeList;
+		while(~(list[1] = null))
+		{
+			let list = list[1]; // find the end of the list
+		}
+		let list[1] = object - 1; // object - 1 holds the size
+		let object[0] = null; // point the list to null
+		return;
+    }    
+}

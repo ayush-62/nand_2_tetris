@@ -1,0 +1,724 @@
+function Sprite.new 0
+push constant 5
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push constant 0
+pop this 2
+push constant 16
+call Array.new 1
+pop this 3
+push constant 16
+call Array.new 1
+pop this 4
+push pointer 0
+push constant 0
+call Sprite.initSprite 2
+pop temp 0
+push pointer 0
+call Sprite.draw 1
+pop temp 0
+push pointer 0
+return
+function Sprite.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function Sprite.initSprite 1
+push argument 0
+pop pointer 0
+push argument 1
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 4
+pop local 0
+goto IF_END0
+label IF_FALSE0
+push this 3
+pop local 0
+label IF_END0
+push constant 0
+push local 0
+add
+push constant 4080
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push constant 8184
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push local 0
+add
+push constant 13260
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push local 0
+add
+push constant 13260
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push local 0
+add
+push constant 16380
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push local 0
+add
+push constant 32767
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push local 0
+add
+push constant 1057
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push local 0
+add
+push constant 961
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push local 0
+add
+push constant 1
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push local 0
+add
+push constant 1
+neg
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push local 0
+add
+push constant 32767
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push local 0
+add
+push constant 16376
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push local 0
+add
+push constant 4080
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push local 0
+add
+push constant 2016
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push local 0
+add
+push constant 992
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 15
+push local 0
+add
+push constant 960
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push argument 1
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 3
+pop local 0
+goto IF_END1
+label IF_FALSE1
+push this 4
+pop local 0
+label IF_END1
+push constant 0
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 1
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 2
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 3
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 4
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 5
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 6
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 7
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 8
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 9
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 10
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 11
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 12
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 13
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 14
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 15
+push local 0
+add
+push constant 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push constant 0
+return
+function Sprite.draw 4
+push argument 0
+pop pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+add
+pop local 1
+push constant 16384
+push local 1
+add
+pop local 0
+push constant 0
+pop local 3
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 3
+push constant 481
+lt
+not
+if-goto WHILE_END0
+push local 0
+push local 3
+add
+push local 2
+push this 3
+add
+pop pointer 1
+push that 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push local 3
+add
+push constant 1
+add
+push local 2
+push this 4
+add
+pop pointer 1
+push that 0
+call Memory.poke 2
+pop temp 0
+push local 3
+push constant 32
+add
+pop local 3
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Sprite.erase 3
+push argument 0
+pop pointer 0
+push this 1
+push constant 32
+call Math.multiply 2
+push this 0
+add
+pop local 1
+push constant 16384
+push local 1
+add
+pop local 0
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 2
+push constant 481
+lt
+not
+if-goto WHILE_END0
+push local 0
+push local 2
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 0
+push local 2
+add
+push constant 1
+add
+push constant 0
+call Memory.poke 2
+pop temp 0
+push local 2
+push constant 32
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Sprite.moveUp 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 1
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Sprite.erase 1
+pop temp 0
+push this 1
+push constant 1
+sub
+pop this 1
+push pointer 0
+call Sprite.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Sprite.moveDown 0
+push argument 0
+pop pointer 0
+push this 1
+push constant 16
+add
+push constant 256
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Sprite.erase 1
+pop temp 0
+push this 1
+push constant 1
+add
+pop this 1
+push pointer 0
+call Sprite.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Sprite.moveLeft 3
+push argument 0
+pop pointer 0
+push this 0
+push constant 0
+gt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Sprite.erase 1
+pop temp 0
+push this 2
+push constant 0
+gt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop local 1
+label WHILE_EXP0
+push local 1
+push constant 16
+lt
+not
+if-goto WHILE_END0
+push pointer 0
+push local 1
+push this 3
+add
+pop pointer 1
+push that 0
+call Sprite.leftShift 2
+pop local 2
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+push constant 0
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 1
+push this 3
+add
+push local 2
+push constant 1
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto IF_END2
+label IF_FALSE2
+push local 1
+push this 3
+add
+push local 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END2
+push local 1
+push this 4
+add
+push pointer 0
+push local 1
+push this 4
+add
+pop pointer 1
+push that 0
+call Sprite.leftShift 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 1
+push constant 1
+add
+pop local 1
+goto WHILE_EXP0
+label WHILE_END0
+push this 2
+push constant 1
+sub
+pop this 2
+goto IF_END1
+label IF_FALSE1
+push constant 15
+pop this 2
+push pointer 0
+push constant 0
+not
+call Sprite.initSprite 2
+pop temp 0
+push this 0
+push constant 1
+sub
+pop this 0
+label IF_END1
+push pointer 0
+call Sprite.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Sprite.moveRight 1
+push argument 0
+pop pointer 0
+push this 0
+push constant 31
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push pointer 0
+call Sprite.erase 1
+pop temp 0
+push this 2
+push constant 15
+lt
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 16
+lt
+not
+if-goto WHILE_END0
+push local 0
+push this 3
+add
+pop pointer 1
+push that 0
+push constant 0
+lt
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push local 0
+push this 4
+add
+push pointer 0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+call Sprite.leftShift 2
+push constant 1
+add
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto IF_END2
+label IF_FALSE2
+push local 0
+push this 4
+add
+push pointer 0
+push local 0
+push this 4
+add
+pop pointer 1
+push that 0
+call Sprite.leftShift 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+label IF_END2
+push local 0
+push this 3
+add
+push pointer 0
+push local 0
+push this 3
+add
+pop pointer 1
+push that 0
+call Sprite.leftShift 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 2
+push constant 2
+add
+pop this 2
+goto IF_END1
+label IF_FALSE1
+push constant 0
+pop this 2
+push pointer 0
+push constant 0
+call Sprite.initSprite 2
+pop temp 0
+push this 0
+push constant 1
+add
+pop this 0
+label IF_END1
+push pointer 0
+call Sprite.draw 1
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function Sprite.rightShift 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 0
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push argument 1
+push constant 32767
+and
+pop argument 1
+push argument 1
+push constant 2
+call Math.divide 2
+push constant 16384
+add
+pop argument 1
+goto IF_END0
+label IF_FALSE0
+push argument 1
+push constant 2
+call Math.divide 2
+pop argument 1
+label IF_END0
+push argument 1
+return
+function Sprite.leftShift 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 2
+call Math.multiply 2
+pop argument 1
+push argument 1
+return

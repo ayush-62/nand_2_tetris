@@ -1,0 +1,274 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/09/Sprite/Sprite.jack
+
+/** Implements a graphical Sprite. */
+class Sprite {
+
+   field int x, y, ind; // screen location of the Sprite's top-left corner
+   field Array col1, col2;
+   // field int location; // length of this Sprite, in pixels
+ 
+   /** Constructs a new Sprite with a given location and size. */
+   constructor Sprite new(int Ax, int Ay) {
+      let x = Ax;
+      let y = Ay;
+      let ind = 0;
+      let col1 = Array.new(16);
+      let col2 = Array.new(16);
+      do initSprite(false);
+      do draw();
+      return this;
+   }
+   
+    /** Disposes this Sprite. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+   
+   method void initSprite(bool left) {
+      var Array arr;
+      
+      
+      if(left) {
+         let arr = col2;
+      }
+      else {
+         let arr = col1;
+      }
+
+      let arr[0] = 4080;
+      let arr[1] = 8184;
+      let arr[2] = 13260;
+      let arr[3] = 13260;
+      let arr[4] = 16380;
+      let arr[5] = 32767;
+      let arr[6] = -1057;
+      let arr[7] = -961;
+      let arr[8] = -1;
+      let arr[9] = -1;
+      let arr[10] = 32767;
+      let arr[11] = 16376;
+      let arr[12] = 4080;
+      let arr[13] = 2016;
+      let arr[14] = 992;
+      let arr[15] = 960;
+
+      if(left) {
+         let arr = col1;
+      }
+      else {
+         let arr = col2;
+      }
+
+      let arr[0] = 0;
+      let arr[1] = 0;
+      let arr[2] = 0;
+      let arr[3] = 0;
+      let arr[4] = 0;
+      let arr[5] = 0;
+      let arr[6] = 0;
+      let arr[7] = 0;
+      let arr[8] = 0;
+      let arr[9] = 0;
+      let arr[10] = 0;
+      let arr[11] = 0;
+      let arr[12] = 0;
+      let arr[13] = 0;
+      let arr[14] = 0;
+      let arr[15] = 0;
+      
+      // let col1[0] = 4080;
+      // let col1[1] = 8184;
+      // let col1[2] = 13260;
+      // let col1[3] = 13260;
+      // let col1[4] = 16380;
+      // let col1[5] = 32767;
+      // let col1[6] = -1057;
+      // let col1[7] = -961;
+      // let col1[8] = -1;
+      // let col1[9] = -1;
+      // let col1[10] = 32767;
+      // let col1[11] = 16376;
+      // let col1[12] = 4080;
+      // let col1[13] = 2016;
+      // let col1[14] = 992;
+      // let col1[15] = 960;
+      
+      // let col2[0] = 0;
+      // let col2[1] = 0;
+      // let col2[2] = 0;
+      // let col2[3] = 0;
+      // let col2[4] = 0;
+      // let col2[5] = 0;
+      // let col2[6] = 0;
+      // let col2[7] = 0;
+      // let col2[8] = 0;
+      // let col2[9] = 0;
+      // let col2[10] = 0;
+      // let col2[11] = 0;
+      // let col2[12] = 0;
+      // let col2[13] = 0;
+      // let col2[14] = 0;
+      // let col2[15] = 0;
+
+      return;
+   }
+
+   /** Draws the Sprite on the screen. */
+   method void draw() {
+      var int memAddress;
+      var int location;
+      var int i;
+      var int line;
+
+      // col-1 & col-2
+      let location = y*32 + x;
+      let memAddress = 16384 + location;   
+      let line = 0;
+      let i = 0;
+      while(line < 481) {
+         // col-1
+         do Memory.poke(memAddress + line, col1[i]);
+         // col-2
+         do Memory.poke(memAddress + line + 1, col2[i]);
+         let line = line + 32;
+         let i = i + 1;
+      }
+      
+      return;
+    }
+ 
+    /** Erases the Sprite from the screen. */
+   method void erase() {
+      var int memAddress;
+      var int location;
+      var int i;
+
+      let location = y*32 + x;
+      let memAddress = 16384 + location;
+      let i = 0;
+
+      while(i < 481) {
+         do Memory.poke(memAddress + i, 0);
+         do Memory.poke(memAddress + i + 1, 0);
+         let i = i + 32;
+      }
+        
+      return;
+   }
+ 
+    /** Moves the Sprite up by 2 pixels. */
+   method void moveUp() {
+      if (y > 1) {
+         do erase();
+         let y = y - 1;
+         do draw();
+      }
+      return;
+   }
+ 
+    /** Moves the Sprite down by 2 pixels. */
+   method void moveDown() {
+      if ((y + 16) < 256) {
+         do erase();
+         let y = y + 1;
+         do draw();
+      }
+      return;
+   }
+ 
+    /** Moves the Sprite left by 2 pixels. */
+   method void moveLeft() {
+      var int rem, i, ls;
+
+      if (x > 0) {
+         do erase();
+
+         if(ind > 0) {
+            let i = 0;
+            while(i < 16) {
+               // c1     c2
+               // 0..16  0..16
+               // let rem = col2[i] & 1;
+               let ls = leftShift(col1[i]);
+               if(col2[i] = 0) {
+                  let col1[i] = ls + 1;
+               }
+               else {
+                  let col1[i] = ls; //- 32767 - 1;
+               }
+               let col2[i] = leftShift(col2[i]);
+               let i = i + 1;
+            }
+            let ind = ind - 1;
+         }
+         else {
+            let ind = 15;
+            do initSprite(true);
+            let x = x - 1;
+         }
+
+         do draw();
+      }
+      return;
+   }
+ 
+    /** Moves the Sprite right by 2 pixels. */
+   method void moveRight() {
+      var int i;
+
+      if (x < 31) {
+         do erase();
+
+         if(ind < 15) {
+            let i = 0;
+            while(i < 16) {
+               if(col1[i] < 0) {
+                  let col2[i] = leftShift(col2[i]) + 1;
+               }
+               else {
+                  let col2[i] = leftShift(col2[i]);
+               }
+               let col1[i] = leftShift(col1[i]);
+               // if(col1[i] < 0) {
+               //    let col2[i] = leftShift(col2[i]) + 1;
+               // }
+               // else {
+               //    let col2[i] = leftShift(col2[i]);
+               // }
+               // let col1[i] = leftShift(col1[i]);
+               let i = i + 1;
+            }
+            let ind = ind + 2;
+         }
+         else {
+            let ind = 0;
+            do initSprite(false);
+            let x = x + 1;
+         }
+         
+         do draw();  
+      }
+      return;
+   }
+
+   method int rightShift(int num) {
+      if(num < 0) {
+         let num = num & 32767;
+         let num = num/2 + 16384;
+      } 
+      else {
+         let num = num/2;
+      } 
+      return num;   
+   }
+
+   method int leftShift(int num) {
+      let num = num*2;  
+      return num;   
+   }
+}
+ 
